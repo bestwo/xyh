@@ -563,9 +563,11 @@
     
     function fly(){
        var $out_btn = $('.out_btn');
+       var _w = document.documentElement.clientWidth || document.body.clientWidth;
+       if(_w>640) _cha = parseInt((_w-640)/2);
        $out_btn.bind('click',function(){  
            var $wt = $wrap_mtop = parseInt($('.wrap').css('margin-top'));     
-
+           
            var $cup = $('#collectBox'),$cup_l=$cup.offset().left+6,$cup_t=$cup.offset().top-parseInt($cup.height()/2-5)-$wt;
            
            var self = $(this);
@@ -582,6 +584,9 @@
               //var s_x = $cup_l - o_l,s_y = $cup_t - o_t;
            var oIndex = $out_btn.index(this);
            $box.attr('value',oIndex);
+           //判断在桌面显示的时候
+           if(_w>640){ $cup_l-=_cha;o_l-=_cha; }
+
            $img.css({
              'position':'absolute',
              'left':o_l,
